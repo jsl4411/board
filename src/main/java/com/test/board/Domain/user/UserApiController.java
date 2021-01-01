@@ -16,14 +16,31 @@ public class UserApiController {
     @Autowired
     UserService userService;
 
-    @PostMapping(value = "/login")
-    public String login(@RequestBody User user, HttpSession session,
-                        HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/login")
+    public String login(User user){
 
-        session = request.getSession();
-        session.setAttribute("loginUser", user.getUserid());
 
-        return userService.findById(user);
+        User user1 = new User();
+        user1.setUserid("jsjs");
+        user1.setPwd("1234");
+        System.out.println("print" +user+user1);
+
+
+        return userService.findByUserid(user1);
+    }
+    @RequestMapping(value = "/signup")
+    public String singUp(User user){
+
+        User user1 = new User();
+
+        user1.setPhone("123412334");
+        user1.setName("빠끄");
+        user1.setEmail("1@2");
+        user1.setUserid("jsjs");
+        user1.setPwd("1234");
+
+
+        return userService.createUser(user1);
     }
 
 }

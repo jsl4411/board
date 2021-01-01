@@ -16,4 +16,32 @@ public class BoardServiceImpl implements BoardService {
 
         return boardList;
     }
+
+    @Override
+    public String write(Board board) {
+
+        boardRepository.save(board);
+
+        return "ok";
+    }
+    @Override
+    public String delete(Long boardSeq){
+        boardRepository.deleteById(boardSeq);
+
+        return "ok";
+    }
+
+    @Override
+    public String edit(Board board) {
+        boardRepository.save(board);
+
+        return "ok";
+    }
+    @Override
+    public List<Board> findByBoardGroup(String boardGroup){
+
+
+        return boardRepository.findByBoardGroup(boardGroup);
+
+    }
 }
