@@ -4,6 +4,7 @@ import com.test.board.Domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
@@ -19,22 +20,12 @@ public class BoardApiController {
 
         return boardService.findAll();
     }
-    @RequestMapping(value = "/write")
-    public String write(Board board){
+    @PostMapping(value = "/write")
+    public String write(@RequestBody Board board, HttpServletRequest request){
+        String userid = (String) request.getSession().getAttribute("loginUser");
+        System.out.println("@@@@@@@@@"+board);
 
-        User user = new User();
-        user.setUserid("jsjs");
-        Board board1 = new Board();
-        board1.setBoardSub("제목");
-        board1.setBoardGroup("분실물");
-        board1.setAno(02L);
-        board1.setContent("내용");
-        board1.setCategory("종류");
-        board1.setDate(new Date());
-        board1.setPlace("위치");
-        board1.setUser(user);
-
-        return boardService.write(board1);
+        return boardService.write(board,userid);
     }
     @GetMapping(value = "/delete/{boardSeq}")
     public String delete(@PathVariable("boardSeq") Long boardSeq){
@@ -45,14 +36,6 @@ public class BoardApiController {
     public String edit(@PathVariable("boardSeq")Long boardSeq){
         Board board1 = new Board();
         User user = new User();
-
-        user.setUserid("jsjs");
-        board1.setBoardSeq(2L);
-        board1.setBoardSub("제목1");
-        board1.setBoardGroup("습득물");
-        board1.setUser(user);
-        board1.setContent("ㅇㅇ");
-        board1.setPlace("장소");
 
         return boardService.edit(board1);
     }

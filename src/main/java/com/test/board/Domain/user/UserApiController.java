@@ -1,6 +1,7 @@
 package com.test.board.Domain.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,17 +17,14 @@ public class UserApiController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/login")
-    public String login(User user){
+    @PostMapping(value = "/login")
+    public String login(@RequestBody User user, Model model, HttpSession session, HttpServletRequest request){
+
+        session = request.getSession();
+        session.setAttribute("loginUser", user.getUserid());
 
 
-        User user1 = new User();
-        user1.setUserid("jsjs");
-        user1.setPwd("1234");
-        System.out.println("print" +user+user1);
-
-
-        return userService.findByUserid(user1);
+        return userService.findByUserid(user);
     }
     @RequestMapping(value = "/signup")
     public String singUp(User user){

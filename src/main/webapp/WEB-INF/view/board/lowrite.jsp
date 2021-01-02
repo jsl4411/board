@@ -55,9 +55,10 @@
 							"category":$("#category").val(),
 							"content":$("#content").val(),
 							"place":$("#place").val(),
-						   	"boardSub":$("#boardSub").val()}),
+						   	"boardSub":$("#boardSub").val(),
+							  "date":$("#date").val()}),
 						success:function(data){
-							location.href='/board/'
+							location.href='/board/lost'
 						},
 						error:function (data){
 							alert("다시");
@@ -316,8 +317,8 @@
 											<div class='col-lg-3'>
 												<div class="select-box">
 													<select name="boardGroup" class="ui fluid dropdown" id="boardGroup" onmousedown="if(this.options.length>5){this.size=5;}" onchange='this.size=0;' onblur="this.size=0;">
-											          	<option value="0">없음</option>
-											          	<option value="1">있음</option>
+											          	<option value="lost">분실물</option>
+											          	<option value="find">습득물</option>
 											   	  	  </select>
 											   	</div>
 											</div>

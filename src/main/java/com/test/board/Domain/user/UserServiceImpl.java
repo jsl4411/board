@@ -12,15 +12,15 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public String findByUserid(User logninUser) {
-        User userData = userRepository.findByUserid(logninUser.getUserid());
+    public String findByUserid(User loginUser) {
+        User userData = userRepository.findByUserid(loginUser.getUserid());
 
         System.out.println("!@#"+userData);
 
         if (userData == null) {
             return "fail";
         }
-        if (logninUser.getPwd().equals(userData.getPwd())) {
+        if (loginUser.getPwd().equals(userData.getPwd())) {
             return "ok";
         }
         return "fail";

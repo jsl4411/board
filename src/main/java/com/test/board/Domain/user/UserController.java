@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +17,10 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/login")
-    public String login(Model model, HttpServletRequest request){
+    @GetMapping(value = "/login")
+    public String login(Model model,HttpSession session, HttpServletRequest request){
 
         model.addAttribute("loginUser", request.getSession().getAttribute("loginUser"));
-
 
         return "main/login";
     }
