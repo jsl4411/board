@@ -64,7 +64,7 @@ public class BoardController {
         model.addAttribute("loginUser",request.getSession().getAttribute("loginUser"));
 
         model.addAttribute("boardedit",boardedit);
-
+        System.out.println("!#!#@#!#@"+boardedit);
         return "board/updatef";
     }
 }

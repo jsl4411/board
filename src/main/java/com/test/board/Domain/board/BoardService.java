@@ -9,7 +9,7 @@ public interface BoardService {
 
     String delete(Long boardSeq);
 
-    String edit(Board board);
+    String edit(Board board, String userid);
 
     List<Board> findByBoardGroup(String boardGroup);
 

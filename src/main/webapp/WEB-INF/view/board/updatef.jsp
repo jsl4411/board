@@ -1,169 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/view/main/header.jsp" %>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<meta name="keywords" content="sansillyung, gxsx, bitcamp">
-		<meta name="description" content="sansillyung - GxSx">
-		<meta name="author" content="sansillyung">
-		
-		<title>GxSx</title>
-		
-	<link rel="stylesheet" href="/css/beryllium/style.css">
-	<link rel="stylesheet" href="/css/beryllium/themify-icons.css">
-	<link rel="stylesheet" href="/css/topmenu.css">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="/images/coza/icons/favicon.png"/>
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/fonts/coza/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="/fonts/coza/iconic/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" type="text/css" href="/fonts/coza/linearicons-v1.0.0/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/slick/slick.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/MagnificPopup/magnific-popup.css">
-	<link rel="stylesheet" type="text/css" href="/vendor/coza/perfect-scrollbar/perfect-scrollbar.css">
-	<link rel="stylesheet" type="text/css" href="/css/coza/util.css">
-	<link rel="stylesheet" type="text/css" href="/css/coza/main.css">
-	
-	<style>
-		.form-control{
-			height:30px;
-		}
-		.csisize{
-			height:70px;
-		}
-	</style>
-	
-</head>
 
-<body class="animsition">
-	
-	<!-- Header -->	
-	<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
-	<!-- ////////////////////////////////////// 맨 위 메뉴 시작 ////////////////////////////////////// -->
-	<header class="header-v4">
-		<!-- Header desktop -->
-		<div class="container-menu-desktop">
-
-			<div class="wrap-menu-desktop how-shadow1">
-				<nav class="limiter-menu-desktop container">
-					
-					<!-- Logo desktop -->		
-					<a href="/" class="logo">
-						<img src="../images/003-.png" alt="IMG-LOGO">
-					</a>
-
-					<!-- Menu desktop -->
-					<div class="menu-desktop">
-						<ul class="main-menu">
-							<li class="active-menu">
-								<a href="/">Home</a>
-							</li>
-
-							<li>
-								<a href="../gxsx/notice.do?cp=1">Notice</a>
-							</li>
-
-							<li class="label1" data-label1="습득물">
-								<a href="../finditem/list.do?cp=1">Finditem</a>
-							</li>
-
-							<li class="label1" data-label1="분실물">
-								<a href="/board/">Lostitem</a>
-							</li>
-							<li>
-								 <a href="../gxsx/contact.do">Contact</a>								 
-							</li>
-						</ul>
-					</div>	
-
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
-						<ul class="main-menu">					
-							<c:if test="${ empty loginUser && empty klogin}">
-									<li><i class="zmdi zmdi-account-circle"></i>
-										<a href="../gxsx/login.do">Login</a></li>
-							</c:if>
-							<c:if test="${ !empty loginUser }">
-								<li class="dropdown">
-							        <li class="dropdown">
-							          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-							          <i class="ti-bell"></i>(<b>${messageResult.size()}</b>)</a>
-							          <c:choose>
-							          	<c:when test="${messageResult=='[]'}">
-							          		<ul class="dropdown-menu notify-drop" style="right:350px;min-width:100px;max-height:30px">
-								            		<div class="drop-content" data-tooltip="tooltip" data-placement="top" style="min-height:10px">
-										            	<li><center><div class="col-md-9 col-sm-9 col-xs-9 pd-l0" style="margin-left:15px;">
-										            		알람 없음</div></center>
-										            	</li>
-									            	</div>
-									            </ul>
-							          	</c:when>
-							          	<c:otherwise>
-								          	<ul class="dropdown-menu notify-drop" style="right:350px">
-									          	<div class="drop-content" data-tooltip="tooltip" data-placement="top">
-									          		<c:forEach items="${messageResult}" var="messageResult" varStatus="status" begin="0" end="4">
-										            	<li><div class="col-md-9 col-sm-9 col-xs-9 pd-l0" style="margin-left:15px;min-width:250px">
-										            		<a href="../Question/questionco.do?qno=${messageResult.qno}">${messageResult.qsub}</a>
-										            		<p style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 250px">${messageResult.qcon}</p>
-										            		<p class="time">답변완료</p></div>
-										            	</li>
-										            </c:forEach>
-									            </div>
-								            </ul>
-							          	</c:otherwise>
-							          </c:choose>
-						            </li>
-							    </li>
-						    </c:if>
-								
-						<c:if test="${ !empty loginUser || !empty klogin }">
-							<li class="dropdown">
-					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="ti-user"></i></a>
-					          <ul class="dropdown-menu notify-drop" style="min-width:150px">
-					            <div class="drop-content" data-tooltip="tooltip" data-placement="top" style="min-height:50px; overflow:hidden">							            
-					            	<li><div>&nbsp;&nbsp;
-											<i class="ti-bookmark-alt"></i>&nbsp;&nbsp;<a href="../Users/mypage.do">마이페이지</a>
-					            		</div></li>
-					            	<li><div>&nbsp;&nbsp;
-					            			<i class="ti-headphone-alt"></i>&nbsp;&nbsp;<a href="../gxsx/contact.do">고객센터</a>
-					            		</div></li>
-					            	<li><div>
-						            		<i class="ti-power-off"></i>
-						            		<c:if test="${ empty loginUser && empty klogin}">
-						            			&nbsp;<a href="">로그아웃</a>
-						            		</c:if>
-						            		<c:if test="${ !empty loginUser && empty kakaologout_url}">
-												&nbsp;<a href="/logout">로그아웃</a>
-											</c:if>
-											<c:if test="${!empty klogin && !empty kakaologout_url}">
-												&nbsp;<a href="${kakaologout_url}">로그아웃</a>
-											</c:if>
-					            		</div></li>
-					             </div>
-						      </ul>
-							</li>
-						</c:if>	
-						</ul>			
-					</div>
-				</nav>
-			</div>	
-		</div>
-	</header>
 	<!-- ////////////////////////////////////// 맨 위 메뉴 종료 ////////////////////////////////////// -->
 	<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
 
 	<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
 	<!-- /////////////////////////////////////// 컨텐츠 시작  /////////////////////////////////////// -->
+
+	<script>
+		function boardEdit(){
+			alert($("#boardGroup").val())
+
+
+			$.ajax({
+				type:"POST",
+				url:"/board/api/edit/"+$("#boardSeq").val(),
+				contentType: 'application/json',
+				dataType: 'text',
+				data: JSON.stringify
+				({	"boardSeq":$("#boardSeq").val(),
+					"boardGroup":$("#boardGroup").val(),
+					"ano":$("#ano").val(),
+					"category":$("#category").val(),
+					"content":$("#content").val(),
+					"place":$("#place").val(),
+					"boardSub":$("#boardSub").val()}),
+				success: function(data){
+					location.href='/board/lost'
+				},
+				error: function(data){
+					alert("애러");
+				}
+			});
+		}
+	</script>
+
+
+
+
+
+
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -198,7 +76,7 @@
 									<form class='form2 fs-12' method='post'  name='input' id='form2' role='form2' enctype='multipart/form-data'
 										autocomplete='off' onsubmit="return false;" >
 
-										<input type="hidden" name="board_seq" id="board_seq" value="${boardedit.board_seq}">
+										<input type="hidden" name="boardSeq" id="boardSeq" value="${boardedit.boardSeq}">
 
 
 										<div class='form-group row'>
@@ -292,8 +170,8 @@
 											<div class='col-lg-5'>
 												<div class="select-box">
 													<select name="boardGroup" class="ui fluid dropdown" id="boardGroup">
-											          	<option value="0">분실물</option>
-											          	<option value="1">습득물</option>
+											          	<option value="lost">분실물</option>
+											          	<option value="find">습득물</option>
 											   	  	</select>
 											   	</div>
 											</div>
@@ -324,7 +202,7 @@
 											&emsp;
 											<div
 												class='flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10'
-												id='submit3' name='submit3' onclick="location.href='/board/'">
+												id='submit3' name='submit3' onclick="location.href='/board/lost'">
 												취소</div>
 										</div>
 									</form>
@@ -343,242 +221,4 @@
 	<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
 	<!-- ////////////////////////////////////// footer 시작 ////////////////////////////////////// -->
 
-	<footer class="bg3 p-t-75 p-b-32">
-		<div class="container">
-			<div class="row">
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-						<h4 class="stext-301 cl0 p-b-30" style="font-size:100px">
-							<img src="../images/003-w.png" >
-						</h4>
-
-					</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						CATEGORIES
-					</h4>
-
-						<ul>
-							<li class="p-b-10">
-								<a href="../gxsx/notice.do" class="stext-107 cl7 hov-cl1 trans-04">
-									Notice
-								</a>
-							</li>
-
-							<li class="p-b-10">
-								<a href="../finditem/list.do?cp=1" class="stext-107 cl7 hov-cl1 trans-04">
-									Finditem
-								</a>
-							</li>
-
-							<li class="p-b-10">
-								<a href="../lostitem/list.do?cp=1" class="stext-107 cl7 hov-cl1 trans-04">
-									Lostitem
-								</a>
-							</li>
-						</ul>
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						CONTACT US
-					</h4>
-
-					<p class="stext-107 cl7 size-201">
-						<i class="fa fa-home"></i> 서울 마포구 백범로 23 구프라자 3층,
-						<br/>&nbsp;&nbsp;&nbsp; (지번)신수동 63-14 구프라자 3층
-					</p>
-					<p class="stext-107 cl7 size-201">
-						<i class="fa fa-phone"></i> 02-707-1480
-					</p>
-					<p class="stext-107 cl7 size-201">
-						<i class="fa fa-envelope"></i> javaoneteam@gmail.com
-
-					</p>
-
-					<div class="p-t-27">
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-facebook"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-instagram"></i>
-						</a>
-
-						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-							<i class="fa fa-pinterest-p"></i>
-						</a>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-lg-3 p-b-50">
-					<h4 class="stext-301 cl0 p-b-30">
-						BUSINESS HOURS
-					</h4>
-
-					<p class="stext-107 cl7 size-201">
-						<i class="fa fa-clock-o"></i> <span class="day">Weekdays : </span>
-						<span>9am to 8pm</span>
-					</p>
-					<p class="stext-107 cl7 size-201">
-						<i class="fa fa-clock-o"></i> <span class="day">Saturday &nbsp; : </span>
-						<span>9am to 2pm</span>
-					</p>
-					<p class="stext-107 cl7 size-201">
-						<i class="fa fa-clock-o"></i> <span class="day">Sunday &nbsp; &nbsp; : </span>
-						<span>Closed</span>
-					</p>
-				</div>
-			</div>
-
-			<p class="stext-107 cl6 txt-center">
-			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | by Sansillyung <i class="fa fa-heart-o" aria-hidden="true"></i>
-			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
-				</p>
-			</div>
-	</footer>
-
-	<!-- ////////////////////////////////////// footer 종료 ////////////////////////////////////// -->
-	<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
-
-
-	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
-		</span>
-	</div>
-
-<!--===============================================================================================-->
-	<script src="/vendor/coza/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/bootstrap/js/popper.js"></script>
-	<script src="/vendor/coza/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/select2/select2.min.js"></script>
-	<script>
-		$(".js-select2").each(function(){
-			$(this).select2({
-				minimumResultsForSearch: 20,
-				dropdownParent: $(this).next('.dropDownSelect2')
-			});
-		})
-	</script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/daterangepicker/moment.min.js"></script>
-	<script src="/vendor/coza/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/slick/slick.min.js"></script>
-	<script src="/js/coza/slick-custom.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/parallax100/parallax100.js"></script>
-	<script>
-        $('.parallax100').parallax100();
-	</script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/MagnificPopup/jquery.magnific-popup.min.js"></script>
-	<script>
-		$('.gallery-lb').each(function() { // the containers for all your galleries
-			$(this).magnificPopup({
-		        delegate: 'a', // the selector for gallery item
-		        type: 'image',
-		        gallery: {
-		        	enabled:true
-		        },
-		        mainClass: 'mfp-fade'
-		    });
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/sweetalert/sweetalert.min.js"></script>
-	<script>
-		$('.js-addwish-b2').on('click', function(e){
-			e.preventDefault();
-		});
-
-		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
-
-		$('.js-addwish-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		});
-
-		/*---------------------------------------------*/
-
-		$('.js-addcart-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="/vendor/coza/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-	<script>
-		$('.js-pscroll').each(function(){
-			$(this).css('position','relative');
-			$(this).css('overflow','hidden');
-			var ps = new PerfectScrollbar(this, {
-				wheelSpeed: 1,
-				scrollingThreshold: 1000,
-				wheelPropagation: false,
-			});
-
-			$(window).on('resize', function(){
-				ps.update();
-			})
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="/js/coza/main.js"></script>
-<script>
-	function boardEdit(){
-		alert($("#boardGroup").val())
-
-
-		$.ajax({
-			type:"POST",
-			url:"/board/api/edit/"+$("#boardSeq").val(),
-			contentType: 'application/json',
-			dataType: 'text',
-			data: JSON.stringify
-			({	"board_seq":$("#boardSeq").val(),
-				"boardGroup":$("#boardGroup").val(),
-				"ano":$("#ano").val(),
-				"category":$("#category").val(),
-				"content":$("#content").val(),
-				"place":$("#place").val(),
-				"boardSub":$("#boardSub").val()}),
-			success: function(data){
-				location.href='/board/'
-			},
-			error: function(data){
-				alert("애러");
-			}
-		});
-	}
-</script>
-
-</body>
-</html>
+<%@ include file="/WEB-INF/view/main/footer.jsp" %>

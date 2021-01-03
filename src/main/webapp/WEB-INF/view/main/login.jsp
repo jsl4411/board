@@ -36,7 +36,12 @@
 				dataType: 'text',
 				data: JSON.stringify({"userid":$("#userid").val(), "pwd":$("#pwd").val()}),
 				success: function(data){
-					location.href='/'
+					if (document.referrer && document.referrer.indexOf("/") !== -1) {
+						history.back();
+					}
+					else {
+						location.href = "/";
+					}
 				},
 				error: function(data){
 					alert("?? 에러가 발생했습니다.");

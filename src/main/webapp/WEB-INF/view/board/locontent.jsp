@@ -16,7 +16,7 @@
 			dataType: 'text',
 			success: function(data){
 				alert("게시물이 지워졌습니다.")
-				location.href='/board/'
+				location.href='/board/lost'
 			},
 			error: function(data){
 				alert("애러");
@@ -180,8 +180,8 @@
 								<div class="flex-w flex-t p-b-68" id="lost_comment_list">
 									<c:forEach var="comments" items="${boardcontant.comments}" varStatus="status">
 
+										<div class="size-207" id="comment${comments.commentSeq}" style="margin-left:100px">
 
-										<div class="size-207" id="comment_${comments.comment_seq}" style="margin-left:100px">
 											<div class="flex-w flex-sb-m p-b-17" style="justify-content: unset">
 												<span class="mtext-107 cl2 p-r-20">
 													${boardcontant.user.userid}
@@ -192,8 +192,8 @@
 												<span class="fs-18 cl11">
 												<c:if test="${loginUser eq boardcontant.user.userid }">
 													<c:if test="${!empty loginUser}">
-														<button id="btn${comments.comment_seq}"  type="button" onclick="update_form_id(this.value);" value="${comments.comment_seq}" class="stext-109 cl8 hov-cl1 trans-04">수정</button>
-														<button id="btndel${comments.comment_seq}" type="button" id="comment_seq"onclick="commentDelete('${comments.comment_seq}', '${ comments.seq }');" value="${comments.comment_seq}" class="stext-109 cl8 hov-cl1 trans-04" >삭제</button>
+														<button id="btn${comments.commentSeq}"  type="button" onclick="update_form_id(this.value);" value="${comments.commentSeq}" class="stext-109 cl8 hov-cl1 trans-04">수정</button>
+														<button id="btndel${comments.commentSeq}" type="button" id="commentSeq"onclick="commentDelete('${comments.commentSeq}', '${ comments.seq }');" value="${comments.commentSeq}" class="stext-109 cl8 hov-cl1 trans-04" >삭제</button>
 
 													</c:if>
 												</c:if>
@@ -201,7 +201,7 @@
 												</span>
 											</div>
 
-											<div id="update-form-${comments.comment_seq}">
+											<div id="update-form-${comments.commentSeq}">
 												<p class="stext-102 cl6">
 													<c:out value="${ comments.content }" escapeXml="true"/>
 												</p>

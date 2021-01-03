@@ -1,9 +1,12 @@
 package com.test.board.Domain.comment;
 
+import com.test.board.Domain.board.Board;
+import com.test.board.Domain.board.BoardService;
 import com.test.board.Domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -11,23 +14,21 @@ import java.util.List;
 @RequestMapping(value = "comment/api/")
 public class CommentApiController {
     @Autowired CommentService commentService;
+    @Autowired
+    BoardService boardService;
 
     @RequestMapping(value = "/{boardSeq}", method = RequestMethod.GET)
     public List<Comment> findAll(@PathVariable ("boardSeq") Long boardSeq){
 
         return commentService.findBySeq(boardSeq);
     }
-    @RequestMapping(value = "/write")
-    public String write(Comment comment){
-        Comment comment1 = new Comment();
-        User user = new User();
-        user.setUserid("jsjs");
-        comment1.setContent("아니");
-        comment1.setDate(new Date());
-        comment1.setUser(user);
-        comment1.setSeq(2L);
+    @PostMapping(value = "/write")
+    public String write(@RequestBody Comment comment, HttpServletRequest request){
 
-    return commentService.write(comment1);
+        String userid = (String) request.getSession().getAttribute("loginUser");
+
+        System.out.println("@@@@@@"+comment.getSeq());
+    return commentService.write(comment, userid);
     }
     @GetMapping (value = "/delete/{commentSeq}")
     public String delete(@PathVariable("commentSeq") Long commentSeq){
@@ -35,19 +36,11 @@ public class CommentApiController {
 
         return commentService.delete(commentSeq);
     }
-    @GetMapping(value = "/edit/{commentSeq}")
-    public String edit(@PathVariable("commentSeq") Long commentSeq){
-        Comment comment1 = new Comment();
-        User user = new User();
+    @PostMapping(value = "/edit/{commentSeq}")
+    public String edit(@RequestBody Comment comment,HttpServletRequest request){
+        String userid = (String) request.getSession().getAttribute("loginUser");
 
-        user.setUserid("jsjs");
-        comment1.setCommentSeq(1L);
-        comment1.setUser(user);
-        comment1.setDate(new Date());
-        comment1.setContent("변경됨");
-        comment1.setSeq(2L);
-
-        return commentService.edit(comment1);
+        return commentService.edit(comment, userid);
 
     }
 }

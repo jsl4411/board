@@ -35,6 +35,7 @@ public class BoardServiceImpl implements BoardService {
         board1.setContent(board.getContent());
         board1.setCategory(board.getCategory());
         board1.setAno(board.getAno());
+
         System.out.println("###########"+board1);
         boardRepository.save(board1);
 
@@ -48,8 +49,22 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public String edit(Board board) {
-        boardRepository.save(board);
+    public String edit(Board board, String userid) {
+        Optional<User> user = Optional.ofNullable(userRepository.findByUserid(userid));
+        Board board1 = new Board();
+        board1.setBoardSeq(board.getBoardSeq());
+        board1.setUser(user.get());
+        board1.setBoardGroup(board.getBoardGroup());
+        board1.setBoardSub(board.getBoardSub());
+        board1.setPlace(board.getPlace());
+        board1.setContent(board.getContent());
+        board1.setCategory(board.getCategory());
+        board1.setDate(board.getDate());
+        board1.setAno(board.getAno());
+
+        System.out.println("@@@@@@@@@@"+board1);
+
+        boardRepository.save(board1);
 
         return "ok";
     }

@@ -43,12 +43,12 @@ function commentInsert(boardSeq){
 		sendData = {
 
 			"content": review,
-			"boardSeq": boardSeq,
+			"seq": boardSeq,
 		}
 	} else {
 		sendData = {
 			"content": review,
-			"boardSeq": boardSeq
+			"seq": boardSeq
 		};
 	}
 	$.ajax({

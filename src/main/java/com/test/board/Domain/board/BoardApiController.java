@@ -32,11 +32,10 @@ public class BoardApiController {
 
         return boardService.delete(boardSeq);
     }
-    @GetMapping(value = "/edit/{boardSeq}")
-    public String edit(@PathVariable("boardSeq")Long boardSeq){
-        Board board1 = new Board();
-        User user = new User();
+    @PostMapping(value = "/edit/{boardSeq}")
+    public String edit(@RequestBody Board board, HttpServletRequest request){
+        String userid = (String) request.getSession().getAttribute("loginUser");
 
-        return boardService.edit(board1);
+        return boardService.edit(board, userid);
     }
 }
