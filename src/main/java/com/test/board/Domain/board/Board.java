@@ -45,7 +45,7 @@ public class Board {
     @Column(name = "category")
     private String category;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "seq")
     List<Comment> comments = new ArrayList<Comment>();
 

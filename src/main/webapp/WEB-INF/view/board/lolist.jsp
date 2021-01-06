@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/view/main/header.jsp" %>
+<%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 
 	<!-- ////////////////////////////////////// 맨 위 메뉴 종료 ////////////////////////////////////// -->
@@ -204,4 +204,4 @@
 	<!-- /////////////////////////////////////// 컨텐츠 종료  /////////////////////////////////////// -->
 	<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
 
-	<%@ include file="/WEB-INF/view/main/footer.jsp" %>
+	<%@ include file="/WEB-INF/view/include/footer.jsp" %>

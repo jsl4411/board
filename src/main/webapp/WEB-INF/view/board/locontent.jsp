@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/WEB-INF/view/main/header.jsp" %>
+<%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 <script src="/js/tempjs/LoComments.js"></script>
 <script>
@@ -287,4 +287,4 @@
 	<!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
 	<!-- ////////////////////////////////////// footer 시작 ////////////////////////////////////// -->
 
-<%@ include file="/WEB-INF/view/main/footer.jsp" %>
+<%@ include file="/WEB-INF/view/include/footer.jsp" %>

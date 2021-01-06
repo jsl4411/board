@@ -43,6 +43,7 @@ public class BoardServiceImpl implements BoardService {
     }
     @Override
     public String delete(Long boardSeq){
+
         boardRepository.deleteById(boardSeq);
 
         return "ok";

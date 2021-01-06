@@ -28,7 +28,7 @@ public class BoardApiController {
         return boardService.write(board,userid);
     }
     @GetMapping(value = "/delete/{boardSeq}")
-    public String delete(@PathVariable("boardSeq") Long boardSeq){
+    public String delete(@PathVariable Long boardSeq){
 
         return boardService.delete(boardSeq);
     }
