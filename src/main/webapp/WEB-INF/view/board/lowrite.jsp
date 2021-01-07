@@ -19,7 +19,10 @@
 						   	"boardSub":$("#boardSub").val(),
 							  "date":$("#date").val()}),
 						success:function(data){
-							location.href='/board/lost'
+							if($("#boardGroup").val()=="lost"){
+								return location.href='/board/lost'
+							}
+							return location.href='/board/find'
 						},
 						error:function (data){
 							alert("다시");
@@ -27,8 +30,96 @@
 					});
 				}
 		</script>
+		<script src="/vendor/coza/jquery/jquery-3.2.1.min.js"></script>
+		<%--<script type="text/javascript">
+			var sel_files = [];
+
+			$(document).ready(function (){
+				$("#picture").on("change", handleImgsFilesSelect);
+			});
+
+			function handleImgsFilesSelect(e){
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+
+				filesArr.forEach(function (f){
+					if(!f.type.match("image.*")){
+						alert("이미지확장자만 가능");
+						return;
+					}
+					sel_files.push(f);
+
+					var reader = new FileReader();
+					reader.onload = function (e){
+						var img_html = "<img src=\""+ e.target.result +"\"/>";
+						$(".picture_wrap").append(img_html);
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+		</script>--%>
+
+		<%--<<script type="text/javascript">
+
+			var upFiles = [];
+
+			$('#picture').on("change",(function (e){
+				var files = e.target.files, file;
+
+				for (var i = 0; i < files.length; i++){
+					file = files[i];
+					upFiles.push(file);
+					$()
+				}
+
+				var html = '';
+				var a = $("<div></div>")
+				a.addClass("file")
+				var img = $()
+				$.each(target[0].files, function (index, file){
+					var a = $("<div></div>")
+					a.addClass("file")
+					var img = $("<img>")
+					img.src()
+
+					$('#fileList').append();
+				});
+
+			});
+		</script>--%>
 
 
+			<script>
+				function setThumbnail(event){
+					for (var picture of event.target.files){
+
+						var reader = new FileReader();
+
+						reader.onload = function (event){
+
+							var div = document.createElement("div");
+
+							var img = document.createElement("img");
+							img.setAttribute("src", event.target.result);
+							var btn = document.createElement("button");
+							btn.innerHTML = "X";
+							btn.onclick = function (){
+								this.parentNode.remove();
+
+							}
+							div.appendChild(img)
+							div.appendChild(btn)
+
+							document.querySelector("div#fileList").appendChild(div);
+
+						};
+
+						console.log(picture);
+						reader.readAsDataURL(picture);
+
+					}
+				}
+			</script>
 
 
 	<!-- ////////////////////////////////////// 맨 위 메뉴 종료 ////////////////////////////////////// -->
@@ -181,8 +272,12 @@
 											</div>
 										</div>
 										
-										<div id=fileup>
-											<input type="file" name="files" multiple>
+										<div>
+											<input type="file" id="picture" name="files[]" accept="image/*" onchange="setThumbnail(event)" multiple/>
+
+										</div>
+										<div id="fileList" class="fileList">
+
 										</div>
 																			
 										</br>
@@ -218,5 +313,9 @@
 
 
 	<script src="/js/tempjs/FiComments.js"></script>
+
+
+
+
 
 <%@ include file="/WEB-INF/view/include/footer.jsp" %>
