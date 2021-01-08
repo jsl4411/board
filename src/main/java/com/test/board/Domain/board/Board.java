@@ -1,6 +1,7 @@
 package com.test.board.Domain.board;
 
 import com.test.board.Domain.comment.Comment;
+import com.test.board.Domain.picture.Picture;
 import com.test.board.Domain.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,5 +49,11 @@ public class Board {
     @OneToMany(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "seq")
     List<Comment> comments = new ArrayList<Comment>();
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name ="boardSeq")
+    List<Picture> pictures = new ArrayList<Picture>();
+
+
 
 }

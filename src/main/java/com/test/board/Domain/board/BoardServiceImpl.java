@@ -1,5 +1,8 @@
 package com.test.board.Domain.board;
 
+import com.test.board.Domain.picture.BoardVO;
+import com.test.board.Domain.picture.Picture;
+import com.test.board.Domain.picture.PictureRepository;
 import com.test.board.Domain.user.User;
 import com.test.board.Domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ public class BoardServiceImpl implements BoardService {
     private BoardRepository boardRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PictureRepository pictureRepository;
 
     @Override
     public List<Board> findAll(){
@@ -23,7 +28,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public String write(Board board, String userid) {
+    public String write(BoardVO board,Picture picture, String userid) {
 
         Optional<User> user = Optional.ofNullable(userRepository.findByUserid(userid));
         Board board1 = new Board();
@@ -38,6 +43,15 @@ public class BoardServiceImpl implements BoardService {
 
         System.out.println("###########"+board1);
         boardRepository.save(board1);
+        boardRepository.findById(board1.getBoardSeq());
+
+        Picture picture1 = new Picture();
+        picture1.setPictureName(board.getPictureName());
+        picture1.setBoardSeq(board1.getBoardSeq());
+
+        System.out.println("!@#!@#!@#"+picture1);
+        pictureRepository.save(picture1);
+
 
         return "ok";
     }

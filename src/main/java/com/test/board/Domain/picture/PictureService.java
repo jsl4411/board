@@ -4,7 +4,7 @@ public interface PictureService {
 
     Picture findById(long pictureSeq);
 
-    String write(Picture picture);
+    String write(BoardVO board);
 
     String deleteById(Long pictureSeq);
 }

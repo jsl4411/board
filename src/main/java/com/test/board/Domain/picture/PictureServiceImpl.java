@@ -17,9 +17,16 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    @Transactional
-    public String write(Picture picture) {
-        pictureRepository.save(picture);
+    public String write(BoardVO board) {
+        Picture picture1 = new Picture();
+
+        picture1.setPictureName(board.pictureName);
+        picture1.setBoardSeq(board.boardSeq);
+
+        System.out.println("service!!!!!"+picture1);
+
+        pictureRepository.save(picture1);
+
         return "success";
     }
 

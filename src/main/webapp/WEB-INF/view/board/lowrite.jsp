@@ -17,7 +17,10 @@
 							"content":$("#content").val(),
 							"place":$("#place").val(),
 						   	"boardSub":$("#boardSub").val(),
-							  "date":$("#date").val()}),
+							  "date":$("#date").val(),
+						  	"pictureName":$("#picture").val(),
+							  "boardSeq":$("#boardSeq").val()
+						  }),
 						success:function(data){
 							if($("#boardGroup").val()=="lost"){
 								return location.href='/board/lost'
@@ -31,66 +34,11 @@
 				}
 		</script>
 		<script src="/vendor/coza/jquery/jquery-3.2.1.min.js"></script>
-		<%--<script type="text/javascript">
-			var sel_files = [];
-
-			$(document).ready(function (){
-				$("#picture").on("change", handleImgsFilesSelect);
-			});
-
-			function handleImgsFilesSelect(e){
-				var files = e.target.files;
-				var filesArr = Array.prototype.slice.call(files);
-
-				filesArr.forEach(function (f){
-					if(!f.type.match("image.*")){
-						alert("이미지확장자만 가능");
-						return;
-					}
-					sel_files.push(f);
-
-					var reader = new FileReader();
-					reader.onload = function (e){
-						var img_html = "<img src=\""+ e.target.result +"\"/>";
-						$(".picture_wrap").append(img_html);
-					}
-					reader.readAsDataURL(f);
-				});
-			}
-		</script>--%>
-
-		<%--<<script type="text/javascript">
-
-			var upFiles = [];
-
-			$('#picture').on("change",(function (e){
-				var files = e.target.files, file;
-
-				for (var i = 0; i < files.length; i++){
-					file = files[i];
-					upFiles.push(file);
-					$()
-				}
-
-				var html = '';
-				var a = $("<div></div>")
-				a.addClass("file")
-				var img = $()
-				$.each(target[0].files, function (index, file){
-					var a = $("<div></div>")
-					a.addClass("file")
-					var img = $("<img>")
-					img.src()
-
-					$('#fileList').append();
-				});
-
-			});
-		</script>--%>
-
 
 			<script>
 				function setThumbnail(event){
+
+
 					for (var picture of event.target.files){
 
 						var reader = new FileReader();
@@ -120,6 +68,29 @@
 					}
 				}
 			</script>
+
+			<script>
+				function uploadImage(){
+					var file = $('#picture')[0].files[0];
+					var formData = new FormData();
+					formData.append('data', file);
+					$.ajax({
+						type: 'POST',
+						url: '/upload',
+						data: formData,
+						processData: false,
+						contentType: false
+					}).done(function (data) {
+						alert("이미지업로드 성공");
+					}).fail(function (error) {
+						alert(error);
+					})
+				}
+			</script>
+
+
+
+
 
 
 	<!-- ////////////////////////////////////// 맨 위 메뉴 종료 ////////////////////////////////////// -->
@@ -276,8 +247,8 @@
 											<input type="file" id="picture" name="files[]" accept="image/*" onchange="setThumbnail(event)" multiple/>
 
 										</div>
-										<div id="fileList" class="fileList">
-
+										<div id="fileList" class="fileList" multiple/>
+											<button onclick="uploadImage()">올리기</button>
 										</div>
 																			
 										</br>
@@ -292,7 +263,7 @@
 											&emsp;
 											<button
 												class='flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10'
-												id='submit3' name='submit3' onclick="location.href='/board/'">
+												id='submit3' name='submit3' onclick="location.href='/board/lost'">
 												취소</button>
 										</div>
 									</form>

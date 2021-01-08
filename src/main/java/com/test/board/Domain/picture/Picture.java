@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
 @Entity
 @Data
@@ -20,6 +20,7 @@ public class Picture {
 
     @Column(nullable = false)
     private Long boardSeq;
+
     @Column(nullable = false)
     private String pictureName;
 }
